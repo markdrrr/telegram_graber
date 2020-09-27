@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Telegram graber</title>
+    <script src="eel.js"></script>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="header">
+    <h2>Telegram graber</h2>
+</div>
+<div class="form">
+    <form>
+        <input id='donor' class="enter" type="text" placeholder="От куда">
+        <input id='channel' class="enter" type="text" placeholder="Куда">
+        <input id='api_id' class="enter" type="text" placeholder="api id">
+        <input id='api_hash' class="enter" type="text" placeholder="api hash">
+    </form>
+</div>
+<div class="parent">
+    <div class="inner">
+        <div class="block">
+            <form>
+                <input id='phone' class="enter2" type="text" placeholder="Номер телефона" value="89060888812">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="butt">
+    <button id='show' class="but" >Войти</button>
+</div>
+<div id="info" align="center"></div>
+<div class="form2">
+    <input id='code' class="enter3" type="text" placeholder="code">
+</div>
+<div class="butt">
+    <button id='show2' class="but" >Отправить и Начать</button>
+</div>
+<div id="info2" class="inf2" align="center"></div>
+<div id="info3" class="inf3" align="center"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    async function run_js(){
+        let api_id = document.getElementById('api_id').value;
+        let api_hash = document.getElementById('api_hash').value;
+        let phone = document.getElementById('phone').value;
+        let res = await eel.login(api_id, api_hash, phone)();
+        document.getElementById('info').innerHTML = res;
+        }
+        jQuery('#show').on('click',function(){
+            //
+            run_js();
+        });
+    </script>
+    <script type="text/javascript">
+    async function run_js2(){
+        let code = document.getElementById('code').value;
+        let phone = document.getElementById('phone').value;
+        let api_id = document.getElementById('api_id').value;
+        let api_hash = document.getElementById('api_hash').value;
+        let donor = document.getElementById('donor').value;
+        let channel = document.getElementById('channel').value;
+        document.getElementById('info2').innerHTML = 'Started';
+        let res = await eel.entry_code(api_id, api_hash, phone, code, donor, channel)();
+        }
+        jQuery('#show2').on('click',function(){
+            //
+            run_js2();
+        });
+    </script>
+<script type="text/javascript">
+    async function run_js3(){
+        let donor = document.getElementById('donor').value;
+        let channel = document.getElementById('channel').value;
+        let api_id = document.getElementById('api_id').value;
+        let api_hash = document.getElementById('api_hash').value;
+        await eel.run(donor, channel, api_id, api_hash)();
+        document.getElementById('info3').innerHTML = "Started";
+        }
+        jQuery('#show3').on('click',function(){
+            //
+            run_js3();
+        });
+    </script>
+<script type="text/javascript">
+eel.expose(prnt);
+function prnt(text) {
+  document.getElementById('info3').innerHTML += text;
+}
+</script>
+</body>
+</html>
