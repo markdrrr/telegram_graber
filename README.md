@@ -1,4 +1,6 @@
-## Online telegram graber for channel news
+## Online telegram graber
+
+With use Eel as GUI
 
 Для компеляции программы в единый exe файл использовать команду python
 
